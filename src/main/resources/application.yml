@@ -1,4 +1,7 @@
 spring:
+  application:
+    group: "io.luankuhlmann "
+    name: "ecommerce-project"
   datasource:
     url: jdbc:mysql://localhost:3307/ecommerce
     username: ecommerce_user
@@ -21,3 +24,6 @@ spring:
 
 server:
   port: 8080
+  servlet:
+    context-path: /ecommerce
+
