@@ -2,7 +2,7 @@ package io.luankuhlmann.ecommerce.dto.request;
 
 import java.util.UUID;
 
-public record OrdemItemRequest(
+public record OrderItemRequest(
         UUID productId,
         Integer quantity
 ) {

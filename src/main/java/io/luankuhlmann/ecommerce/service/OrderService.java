@@ -8,7 +8,6 @@ import io.luankuhlmann.ecommerce.model.Order;
 import io.luankuhlmann.ecommerce.model.OrderItem;
 import io.luankuhlmann.ecommerce.model.Product;
 import io.luankuhlmann.ecommerce.repository.OrderRepository;
-import io.luankuhlmann.ecommerce.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,6 @@ import java.util.UUID;
 public class OrderService {
 
     private final ProductService productService;
-
     private final OrderRepository orderRepository;
     private final Producer producer;
 
