@@ -1,5 +1,6 @@
 package io.luankuhlmann.ecommerce.model;
 
+import io.luankuhlmann.ecommerce.core.enumerated.ProductCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +26,8 @@ public class Product {
 
     private BigDecimal price;
 
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private ProductCategory category;
 
     private Integer stock;
 

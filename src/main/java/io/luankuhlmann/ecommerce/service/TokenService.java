@@ -51,13 +51,9 @@ public class TokenService {
         String jti = UUID.randomUUID().toString();
 
         Instant now = Instant.now();
-        Instant expiresAt;
 
-        if(type == TokenType.REFRESH){
-            expiresAt = now.plusSeconds(expiresInRefresh);
-        } else {
-            expiresAt = now.plusSeconds(expiresInAccess);
-        }
+        long expiresIn = (type == TokenType.REFRESH) ? expiresInRefresh : expiresInAccess;
+        Instant expiresAt = now.plusSeconds(expiresIn);
 
         JwtClaimsSet.Builder builder = JwtClaimsSet.builder()
                 .id(jti)

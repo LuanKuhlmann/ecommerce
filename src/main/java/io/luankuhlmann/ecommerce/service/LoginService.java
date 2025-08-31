@@ -17,7 +17,7 @@ public class LoginService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public LoginResponse login(final LoginRequest loginRequest) {
-        User user = userService.finByEmail(loginRequest.email());
+        User user = userService.findByEmail(loginRequest.email());
 
         validatePassword(user.getPassword(), loginRequest.password());
 

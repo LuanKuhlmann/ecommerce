@@ -8,6 +8,7 @@ import io.luankuhlmann.ecommerce.model.Order;
 import io.luankuhlmann.ecommerce.model.OrderItem;
 import io.luankuhlmann.ecommerce.model.Product;
 import io.luankuhlmann.ecommerce.repository.OrderRepository;
+import io.luankuhlmann.ecommerce.util.TokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,12 @@ import java.util.UUID;
 public class OrderService {
 
     private final ProductService productService;
+    private final UserService userService;
     private final OrderRepository orderRepository;
     private final Producer producer;
 
     public OrderCreatedResponse createOrder(Map<UUID, Integer> productQuantities) {
+        Long userId = TokenUtil.extractUserIdFromToken();
         Order order = new Order();
         Set<OrderItem> items = new HashSet<>();
         BigDecimal total = BigDecimal.ZERO;
@@ -49,6 +52,7 @@ public class OrderService {
 
         order.setItems(items);
         order.setTotal(total);
+        order.setUser(userService.findById(userId));
 
         Order savedOrder = orderRepository.save(order);
 
