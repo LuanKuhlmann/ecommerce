@@ -25,6 +25,6 @@ public class RoleService {
 
     private Role findByName(Roles name) {
         return roleRepository.findByName(name)
-                .orElseThrow(() -> new RuntimeException("Role not find"));
+                .orElseThrow(() -> new RuntimeException("Role não encontrado"));
     }
 }

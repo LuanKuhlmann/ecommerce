@@ -4,7 +4,6 @@ import io.luankuhlmann.ecommerce.core.enumerated.Roles;
 import io.luankuhlmann.ecommerce.dto.request.UserRequest;
 import io.luankuhlmann.ecommerce.dto.response.UserCreatedResponse;
 import io.luankuhlmann.ecommerce.mapper.UserMapper;
-import io.luankuhlmann.ecommerce.model.Role;
 import io.luankuhlmann.ecommerce.model.User;
 import io.luankuhlmann.ecommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +23,12 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(userRequest.password());
         User newUser = UserMapper.toEntity(userRequest, encodedPassword);
         newUser.setRoles(roleService.assignRole(Roles.USER));
-
         User savedUser = userRepository.save(newUser);
-
         return UserMapper.toUserCreatedResponse(savedUser);
+    }
+
+    public User finByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario não encontrado para o email: " + email));
     }
 }
