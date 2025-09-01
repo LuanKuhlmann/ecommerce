@@ -19,9 +19,11 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "CHAR(36)")
     private UUID id;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 50, nullable = false)
     private Status status;
 
     private BigDecimal total;

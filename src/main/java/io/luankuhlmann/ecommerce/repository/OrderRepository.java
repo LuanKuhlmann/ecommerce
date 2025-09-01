@@ -15,9 +15,6 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
     @Query("SELECT o FROM Order o WHERE o.userId = :userId")
     List<Order> findByUserId(@Param("userId") Long userId);
 
-    @Query("SELECT DISTINCT o FROM Order o JOIN o.items i WHERE i.productId = :productId")
-    List<Order> findByProductId(@Param("productId") UUID productId);
-
     @Query(value = """
         SELECT o.user_id AS userId, SUM(o.total) AS totalSpent
         FROM orders o
