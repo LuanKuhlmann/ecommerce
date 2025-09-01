@@ -1,6 +1,18 @@
 # Ecommerce Project
 
-A Spring Boot application for ecommerce management, featuring user registration, product management, order processing, reporting, and JWT-based authentication.
+A Spring Boot application for ecommerce management, featuring:
+
+User registration and role-based access (ADMIN/USER)
+
+Product management with CRUD operations
+
+Order processing with dynamic total calculation and stock management
+
+Reporting: top users, average ticket per user, total revenue per month
+
+JWT-based authentication (planned for future implementation)
+
+Future updates: The system will evolve into a microservices architecture with event-driven asynchronous communication, message queues for reliable event handling, distributed transaction management, real-time analytics, and cloud-friendly deployment with containerization and horizontal scaling.
 
 ## Prerequisites
 
