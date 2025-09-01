@@ -10,14 +10,14 @@ import io.luankuhlmann.ecommerce.model.Product;
 import io.luankuhlmann.ecommerce.repository.OrderRepository;
 import io.luankuhlmann.ecommerce.util.TokenUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -101,5 +101,9 @@ public class OrderService {
         producer.sendOrderCreated("Pedido PAGO - ID: " + paidOrder.getId());
 
         return OrderMapper.toOrderCreatedResponse(paidOrder);
+    }
+
+    public List<Order> getOrdersByUserId(Long userId) {
+        return orderRepository.findByUserId(userId);
     }
 }

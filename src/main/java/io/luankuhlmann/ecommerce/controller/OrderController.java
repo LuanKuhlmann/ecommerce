@@ -3,12 +3,14 @@ package io.luankuhlmann.ecommerce.controller;
 import io.luankuhlmann.ecommerce.dto.request.OrderItemRequest;
 import io.luankuhlmann.ecommerce.dto.request.OrderRequest;
 import io.luankuhlmann.ecommerce.dto.response.OrderCreatedResponse;
+import io.luankuhlmann.ecommerce.mapper.OrderMapper;
 import io.luankuhlmann.ecommerce.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -33,5 +35,10 @@ public class OrderController {
     public ResponseEntity<OrderCreatedResponse> payOrder(@PathVariable UUID orderId) {
         OrderCreatedResponse response = orderService.payOrder(orderId);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<OrderCreatedResponse>> getOrdersByUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(OrderMapper.toListOrderCreatedReponse(orderService.getOrdersByUserId(userId)));
     }
 }

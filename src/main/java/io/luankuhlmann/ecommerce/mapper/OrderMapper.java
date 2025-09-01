@@ -2,9 +2,12 @@ package io.luankuhlmann.ecommerce.mapper;
 
 import io.luankuhlmann.ecommerce.dto.response.OrderCreatedResponse;
 import io.luankuhlmann.ecommerce.dto.response.OrderItemResponse;
+import io.luankuhlmann.ecommerce.dto.response.ProductCreatedResponse;
 import io.luankuhlmann.ecommerce.model.Order;
 import io.luankuhlmann.ecommerce.model.OrderItem;
+import io.luankuhlmann.ecommerce.model.Product;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrderMapper {
@@ -28,5 +31,11 @@ public class OrderMapper {
                 orderItem.getQuantity(),
                 orderItem.getPrice()
         );
+    }
+
+    public static List<OrderCreatedResponse> toListOrderCreatedReponse(List<Order> orderList) {
+        return orderList.stream()
+                .map(OrderMapper::toOrderCreatedResponse
+                ).collect(Collectors.toList());
     }
 }
