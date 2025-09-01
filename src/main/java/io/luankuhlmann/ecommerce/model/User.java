@@ -39,10 +39,6 @@ public class User {
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private Set<Order> orders = new HashSet<>();
-
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

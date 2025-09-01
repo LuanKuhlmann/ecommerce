@@ -30,7 +30,6 @@ public class OrderService {
     private final Producer producer;
 
     public OrderCreatedResponse createOrder(Map<UUID, Integer> productQuantities) {
-        Long userId = TokenUtil.extractUserIdFromToken();
         Order order = new Order();
         Set<OrderItem> items = new HashSet<>();
         BigDecimal total = BigDecimal.ZERO;
@@ -52,7 +51,7 @@ public class OrderService {
 
         order.setItems(items);
         order.setTotal(total);
-        order.setUser(userService.findById(userId));
+        order.setUserId(TokenUtil.extractUserIdFromToken());
 
         Order savedOrder = orderRepository.save(order);
 

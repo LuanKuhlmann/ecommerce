@@ -27,3 +27,11 @@ server:
   servlet:
     context-path: /ecommerce
 
+jwt:
+  public-key: ${JWT_PUBLIC_KEY_PATH:classpath:certs/public.key}
+  private-key: ${JWT_PRIVATE_KEY_PATH:classpath:certs/private.key}
+  jwk-key: chave-jwk #provisoria
+  expires-access: 900 #900
+  expires-refresh: 1800 #1800
+  expires-refresh-long: 604800 #604800
+  expires-temp: 900

@@ -32,9 +32,8 @@ public class Order {
     @Builder.Default
     private Set<OrderItem> items = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(nullable = false)
+    private Long userId;
 
     @PrePersist
     public void prePersist() {
