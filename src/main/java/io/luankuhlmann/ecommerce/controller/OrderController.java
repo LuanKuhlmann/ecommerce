@@ -28,4 +28,10 @@ public class OrderController {
         OrderCreatedResponse response = orderService.createOrder(productQuantities);
         return ResponseEntity.created(URI.create("/order/")).body(response);
     }
+
+    @PostMapping("/{orderId}/pay")
+    public ResponseEntity<OrderCreatedResponse> payOrder(@PathVariable UUID orderId) {
+        OrderCreatedResponse response = orderService.payOrder(orderId);
+        return ResponseEntity.ok(response);
+    }
 }

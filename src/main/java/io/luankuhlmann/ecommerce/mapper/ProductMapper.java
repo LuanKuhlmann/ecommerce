@@ -4,6 +4,9 @@ import io.luankuhlmann.ecommerce.dto.request.ProductRequest;
 import io.luankuhlmann.ecommerce.dto.response.ProductCreatedResponse;
 import io.luankuhlmann.ecommerce.model.Product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProductMapper {
 
     public static Product toEntity(ProductRequest productRequest) {
@@ -25,5 +28,11 @@ public class ProductMapper {
                 product.getCategory().name(),
                 product.getStock()
         );
+    }
+
+    public static List<ProductCreatedResponse> toListProductCreatedReponse(List<Product> productList) {
+        return productList.stream()
+                .map(ProductMapper::toProductCreatedResponse
+                ).collect(Collectors.toList());
     }
 }

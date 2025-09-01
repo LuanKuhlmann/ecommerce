@@ -27,12 +27,12 @@ public class UserService {
         return UserMapper.toUserCreatedResponse(savedUser);
     }
 
-    public User findByEmail(String email) {
+    public User getByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado para o email: " + email));
     }
 
-    public User findById(Long userId) {
+    public User getById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado para o id: " + userId));
     }

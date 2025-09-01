@@ -37,7 +37,7 @@ public class OrderService {
             UUID productId = entry.getKey();
             int quantity = entry.getValue();
 
-            Product product = productService.findById(productId);
+            Product product = productService.getProductById(productId);
 
             OrderCreatedResponse orderValidate = getOrderCreatedResponse(product, quantity, order);
             if (orderValidate != null) return orderValidate;
@@ -76,5 +76,30 @@ public class OrderService {
             return OrderMapper.toOrderCreatedResponse(order);
         }
         return null;
+    }
+
+    public OrderCreatedResponse payOrder(UUID orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado: " + orderId));
+
+        if (order.getStatus() != Status.PENDING) {
+            throw new RuntimeException("Pedido não está pendente para pagamento.");
+        }
+
+        for (OrderItem item : order.getItems()) {
+            Product product = item.getProduct();
+
+            OrderCreatedResponse orderValidate = getOrderCreatedResponse(product, item.getQuantity(), order);
+            if (orderValidate != null) return orderValidate;
+
+            productService.updateProductStock(product, item.getQuantity());
+        }
+
+        order.setStatus(Status.PAID);
+        Order paidOrder = orderRepository.save(order);
+
+        producer.sendOrderCreated("Pedido PAGO - ID: " + paidOrder.getId());
+
+        return OrderMapper.toOrderCreatedResponse(paidOrder);
     }
 }

@@ -17,13 +17,13 @@ public class RoleService {
 
     public Set<Role> assignRole(Roles name) {
         Set<Role> roles = new HashSet<>();
-        Role role = findByName(name);
+        Role role = getByName(name);
         roles.add(role);
 
         return roles;
     }
 
-    private Role findByName(Roles name) {
+    private Role getByName(Roles name) {
         return roleRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Role não encontrado"));
     }
