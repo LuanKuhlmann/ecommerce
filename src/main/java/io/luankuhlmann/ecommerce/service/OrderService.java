@@ -25,7 +25,6 @@ import java.util.UUID;
 public class OrderService {
 
     private final ProductService productService;
-    private final UserService userService;
     private final OrderRepository orderRepository;
     private final Producer producer;
 
