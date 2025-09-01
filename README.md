@@ -12,7 +12,7 @@ A Spring Boot application for ecommerce management, featuring user registration,
 
 1. **Start MySQL and RabbitMQ:**
 
-   ```powershell
+
 docker-compose up -d
 ```
 
@@ -24,7 +24,6 @@ docker-compose up -d
 
 3. **Run the application:**
 
-   ```powershell
 ./mvnw spring-boot:run
 ```
 
@@ -136,7 +135,3 @@ docker-compose up -d
 - Database migrations are managed by Flyway.
 
 ---
-
-## License
-
-See [LICENSE](LICENSE).
